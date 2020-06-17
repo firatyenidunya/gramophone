@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:Gramophone/Gramophone.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "container:GramophoneExample/GramophoneExample.xcodeproj">
+   </FileRef>
+</Workspace>
