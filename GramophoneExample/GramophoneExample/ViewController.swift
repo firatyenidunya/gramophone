@@ -12,9 +12,14 @@ import MediaPlayer
 
 class ViewController: UIViewController, GramophoneDelegate {
     private var gramophone: GramophoneProtocol!
+    var gramaphoneState: GramophoneState = .paused
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         gramophone = Gramophone()
         gramophone.delegate = self
         gramophone.add(gramophoneItems: [GramophoneItem(url: URL(string: "https://s3.amazonaws.com/kargopolov/kukushka.mp3")!,
@@ -36,22 +41,45 @@ class ViewController: UIViewController, GramophoneDelegate {
                                                         artist: "First Artist",
                                                         artwork: nil)])
         gramophone.play()
+        gramophone.loop = false
+    }
+
+    @IBAction func previousOnClick(_ sender: Any) {
+        gramophone.playPreviously()
+    }
+
+    @IBAction func nextOnClick(_ sender: Any) {
+        gramophone.playNext()
+    }
+
+    @IBAction func pauseOnClick(_ sender: Any) {
+        if gramaphoneState == .paused {
+            gramophone.play()
+            return
+        }
+
+        if gramaphoneState == .playing {
+            gramophone.pause()
+            return
+        }
     }
 
     func didStateChange(_ gramophone: Gramophone, to state: GramophoneState) {
         print(state)
+        gramaphoneState = state
     }
 
     func didItemPlay(_ gramophone: Gramophone, at index: Int) {
+        print(index)
     }
 }
 
-@objc enum GramophoneState: Int, CustomStringConvertible {
-    case unknown
+enum GramophoneState: Int, CustomStringConvertible {
     case playing
     case paused
     case loading
     case failed
+    case unknown
 
     var description: String {
         switch self {
@@ -69,15 +97,25 @@ class ViewController: UIViewController, GramophoneDelegate {
     }
 }
 
-@objc protocol GramophoneDelegate: class {
-    @objc optional func didStateChange(_ gramophone: Gramophone, to state: GramophoneState)
-    @objc optional func didItemPlay(_ gramophone: Gramophone, at index: Int)
+protocol GramophoneDelegate: AnyObject {
+    func didStateChange(_ gramophone: Gramophone, to state: GramophoneState)
+    func didItemPlay(_ gramophone: Gramophone, at index: Int)
+}
+
+extension GramophoneDelegate {
+    func didStateChange(_ gramophone: Gramophone, to state: GramophoneState) { }
+    func didItemPlay(_ gramophone: Gramophone, at index: Int) { }
 }
 
 protocol GramophoneProtocol {
     var delegate: GramophoneDelegate? { get set }
     var gramophoneItems: [GramophoneItem] { get }
     var state: GramophoneState { get }
+
+    /// Set it to true if you want your playlist plays as loop.
+    /// Set it to false if you want your playlist pause when last audio played.
+    /// Default value of loop is true.
+    var loop: Bool { get set }
 
     func play()
     func play(at index: Int)
@@ -90,7 +128,15 @@ protocol GramophoneProtocol {
     func add(gramophoneItem: GramophoneItem)
     func add(gramophoneItem: GramophoneItem, to index: Int)
 
+    /// Removes item from given index.
+    /// If remove operation is failed returns false otherwise returns true.
+    /// If removed item is playing at the time, automatically plays next audio.
+    @discardableResult
     func removeItem(at index: Int) -> Bool
+
+    /// Removes all items.
+    /// Pauses player if it is playing.
+    /// - Complexity: O(1)
     func removeAll()
 }
 
@@ -103,18 +149,20 @@ class Gramophone: NSObject, GramophoneProtocol {
 
     private(set) var state: GramophoneState = .unknown {
         didSet {
-            delegate?.didStateChange?(self, to: state)
+            delegate?.didStateChange(self, to: state)
         }
     }
+
+    var loop: Bool = true {
+        didSet {
+            isLoopActive = loop
+        }
+    }
+    private var isLoopActive: Bool = true
 
     override init() {
         self.player = Player()
         super.init()
-
-        do {
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
-            try AVAudioSession.sharedInstance().setActive(true)
-        } catch { print(error.localizedDescription) }
 
         setupRemoteCommandCenter()
     }
@@ -130,7 +178,7 @@ class Gramophone: NSObject, GramophoneProtocol {
             player.play(with: item.url)
             setupNowPlaying(with: item)
             state = .playing
-            delegate?.didItemPlay?(self, at: playingItemIndex)
+            delegate?.didItemPlay(self, at: playingItemIndex)
         }
 
         if playingItemIndex >= gramophoneItems.count {
@@ -151,10 +199,12 @@ class Gramophone: NSObject, GramophoneProtocol {
     }
 
     func playNext() {
+        player.pause()
         play(at: playingItemIndex + 1)
     }
 
     func playPreviously() {
+        player.pause()
         play(at: playingItemIndex - 1)
     }
 
@@ -163,32 +213,49 @@ class Gramophone: NSObject, GramophoneProtocol {
         state = .paused
     }
 
+    /// Adds item to end of the list.
     func add(gramophoneItem: GramophoneItem) {
         gramophoneItems.append(gramophoneItem)
     }
 
+    /// Adds item to given index.
     func add(gramophoneItem: GramophoneItem, to index: Int) {
         gramophoneItems.insert(gramophoneItem, at: index)
     }
 
+    /// Adds given gramophone items to end of the current list.
     func add(gramophoneItems: [GramophoneItem]) {
         self.gramophoneItems.append(contentsOf: gramophoneItems)
     }
 
+    /// Removes item from given index.
+    /// If operation is failed returns false.
+    /// If operation is successful returns true.
+    /// If removed item is playing at the time automatically plays next audio.
     @discardableResult
     func removeItem(at index: Int) -> Bool {
         if !gramophoneItems.isEmpty && gramophoneItems.count > index {
+            if playingItemIndex == index {
+                playNext()
+            }
             gramophoneItems.remove(at: index)
             return true
         }
         return false
     }
 
+    /// Removes all items.
+    /// Pauses player if it is playing.
+    /// - Complexity: O(1)
     func removeAll() {
-        gramophoneItems.removeAll()
+        if state == .playing {
+            pause()
+            player.removeItem()
+        }
+        gramophoneItems = []
     }
 
-    func setupNowPlaying(with nowPlayingItem: GramophoneItem) {
+    private func setupNowPlaying(with nowPlayingItem: GramophoneItem) {
         var nowPlayingInfo: [String: Any] = [:]
 
         nowPlayingInfo[MPMediaItemPropertyTitle] = nowPlayingItem.title
@@ -199,42 +266,47 @@ class Gramophone: NSObject, GramophoneProtocol {
             }
         }
 
-        nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = 0
         nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = nowPlayingItem.duration
         nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = 1.0
-
+        
+        MPNowPlayingInfoCenter.default().playbackState = .playing
         MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
     }
 
-    func setupRemoteCommandCenter() {
+    private func setupRemoteCommandCenter() {
         let commandCenter = MPRemoteCommandCenter.shared()
 
         commandCenter.playCommand.isEnabled = true
-        commandCenter.playCommand.addTarget { [unowned self] event in
+        commandCenter.playCommand.addTarget { [weak self] _ in
+            guard let self = self else { return .commandFailed }
             self.play()
             return .success
         }
 
         commandCenter.pauseCommand.isEnabled = true
-        commandCenter.pauseCommand.addTarget { [unowned self] event in
+        commandCenter.pauseCommand.addTarget { [weak self] _ in
+            guard let self = self else { return .commandFailed }
             self.pause()
             return .success
         }
 
         commandCenter.nextTrackCommand.isEnabled = true
-        commandCenter.nextTrackCommand.addTarget { [unowned self] event in
+        commandCenter.nextTrackCommand.addTarget { [weak self] _ in
+            guard let self = self else { return .commandFailed }
             self.playNext()
             return .success
         }
 
         commandCenter.previousTrackCommand.isEnabled = true
-        commandCenter.previousTrackCommand.addTarget { [unowned self] event in
+        commandCenter.previousTrackCommand.addTarget { [weak self] _ in
+            guard let self = self else { return .commandFailed }
             self.playPreviously()
             return .success
         }
 
         commandCenter.changePlaybackPositionCommand.isEnabled = true
-        commandCenter.changePlaybackPositionCommand.addTarget { event in
+        commandCenter.changePlaybackPositionCommand.addTarget {[weak self] event in
+            guard let self = self else { return .commandFailed }
             if let event = event as? MPChangePlaybackPositionCommandEvent {
                 self.player.seek(to: CMTimeMakeWithSeconds(event.positionTime, preferredTimescale: 1000000))
                 return .success
@@ -245,31 +317,40 @@ class Gramophone: NSObject, GramophoneProtocol {
 }
 
 private class Player {
-    var player: AVPlayer!
+    var player: AVPlayer
 
     init() {
         player = AVPlayer()
-        player.automaticallyWaitsToMinimizeStalling = false
+        player.automaticallyWaitsToMinimizeStalling = true
     }
 
     func play(with url: URL) {
-        let playerItem = AVPlayerItem(url: url)
-
-        self.player.replaceCurrentItem(with: playerItem)
-        self.player.play()
+        player.replaceCurrentItem(with: AVPlayerItem(url: url))
+        play()
     }
 
     func play() {
         player.play()
     }
 
+    func play(at currentTime: Double) {
+        player.seek(to: CMTime(value: CMTimeValue(currentTime), timescale: 1000000))
+    }
+
     func pause() {
         player.pause()
-
     }
 
     func seek(to time: CMTime) {
         player.seek(to: time)
+    }
+
+    func removeItem() {
+        player.replaceCurrentItem(with: nil)
+    }
+
+    func currentTime() -> Double {
+        return Double(CMTimeGetSeconds(player.currentTime()))
     }
 }
 
