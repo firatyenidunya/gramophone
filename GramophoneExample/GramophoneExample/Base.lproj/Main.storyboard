@@ -17,38 +17,54 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tT5-fL-LRg">
-                                <rect key="frame" x="81" y="438" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tT5-fL-LRg">
+                                <rect key="frame" x="131" y="442" width="40" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="NeD-oA-OJd"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="backward" catalog="system"/>
                                 <connections>
                                     <action selector="previousOnClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bLy-2r-5RR"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Fa-sB-rDC">
-                                <rect key="frame" x="287" y="438" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Fa-sB-rDC">
+                                <rect key="frame" x="243" y="442" width="40" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="PZd-Ok-6Pr"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="forward" catalog="system"/>
                                 <connections>
                                     <action selector="nextOnClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Woz-6v-dUg"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fVI-aj-wuG">
-                                <rect key="frame" x="184" y="438" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fVI-aj-wuG">
+                                <rect key="frame" x="187" y="442" width="40" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="d11-Ox-IgU"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="playpause" catalog="system"/>
                                 <connections>
                                     <action selector="pauseOnClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="z1a-BL-fpx"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GRAMOPHONE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cno-F2-5aM">
+                                <rect key="frame" x="147.5" y="84" width="119" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="fVI-aj-wuG" firstAttribute="leading" secondItem="tT5-fL-LRg" secondAttribute="trailing" constant="57" id="D4i-La-g2g"/>
-                            <constraint firstItem="tT5-fL-LRg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="81" id="FYa-3R-Z7W"/>
-                            <constraint firstItem="fVI-aj-wuG" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="fBt-fD-GQ3"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="9Fa-sB-rDC" secondAttribute="trailing" constant="81" id="hIe-xU-9XC"/>
-                            <constraint firstItem="9Fa-sB-rDC" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="jNV-eP-8Ew"/>
-                            <constraint firstItem="tT5-fL-LRg" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="muH-X8-QML"/>
-                            <constraint firstItem="9Fa-sB-rDC" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fVI-aj-wuG" secondAttribute="trailing" constant="8" symbolic="YES" id="s1k-ev-zd7"/>
+                            <constraint firstItem="cno-F2-5aM" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="BPS-Sv-7WH"/>
+                            <constraint firstItem="fVI-aj-wuG" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="KVk-e6-pdT"/>
+                            <constraint firstItem="fVI-aj-wuG" firstAttribute="leading" secondItem="tT5-fL-LRg" secondAttribute="trailing" constant="16" id="afv-WW-9jL"/>
+                            <constraint firstItem="cno-F2-5aM" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="40" id="esv-x9-Yz3"/>
+                            <constraint firstItem="9Fa-sB-rDC" firstAttribute="leading" secondItem="fVI-aj-wuG" secondAttribute="trailing" constant="16" id="jaQ-2i-rH6"/>
+                            <constraint firstItem="fVI-aj-wuG" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="n26-5x-B0u"/>
+                            <constraint firstItem="fVI-aj-wuG" firstAttribute="top" secondItem="tT5-fL-LRg" secondAttribute="top" id="tNY-yc-wCx"/>
+                            <constraint firstItem="9Fa-sB-rDC" firstAttribute="top" secondItem="fVI-aj-wuG" secondAttribute="top" id="zRy-W2-6DG"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -58,6 +74,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="backward" catalog="system" width="128" height="79"/>
+        <image name="forward" catalog="system" width="128" height="79"/>
+        <image name="playpause" catalog="system" width="128" height="83"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

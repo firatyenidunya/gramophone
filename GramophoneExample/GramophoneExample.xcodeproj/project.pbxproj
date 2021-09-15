@@ -15,6 +15,9 @@
 		335BD01C249A908D0031A2B5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 335BD01A249A908D0031A2B5 /* LaunchScreen.storyboard */; };
 		335BD027249A908D0031A2B5 /* GramophoneExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335BD026249A908D0031A2B5 /* GramophoneExampleTests.swift */; };
 		335BD032249A908D0031A2B5 /* GramophoneExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335BD031249A908D0031A2B5 /* GramophoneExampleUITests.swift */; };
+		3364606726EC00C200E7FFDA /* BeatIt.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3364606626EC00C200E7FFDA /* BeatIt.mp3 */; };
+		3364609426EC058A00E7FFDA /* Gramophone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3364609326EC058A00E7FFDA /* Gramophone.framework */; };
+		3364609526EC058A00E7FFDA /* Gramophone.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3364609326EC058A00E7FFDA /* Gramophone.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +37,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		3364609626EC058B00E7FFDA /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3364609526EC058A00E7FFDA /* Gramophone.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		335BD00C249A908C0031A2B5 /* GramophoneExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GramophoneExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		335BD00F249A908C0031A2B5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +66,8 @@
 		335BD02D249A908D0031A2B5 /* GramophoneExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GramophoneExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		335BD031249A908D0031A2B5 /* GramophoneExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GramophoneExampleUITests.swift; sourceTree = "<group>"; };
 		335BD033249A908D0031A2B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3364606626EC00C200E7FFDA /* BeatIt.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = BeatIt.mp3; sourceTree = "<group>"; };
+		3364609326EC058A00E7FFDA /* Gramophone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Gramophone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3364609426EC058A00E7FFDA /* Gramophone.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +103,7 @@
 				335BD025249A908D0031A2B5 /* GramophoneExampleTests */,
 				335BD030249A908D0031A2B5 /* GramophoneExampleUITests */,
 				335BD00D249A908C0031A2B5 /* Products */,
+				3364609226EC058A00E7FFDA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,6 +120,7 @@
 		335BD00E249A908C0031A2B5 /* GramophoneExample */ = {
 			isa = PBXGroup;
 			children = (
+				3364606626EC00C200E7FFDA /* BeatIt.mp3 */,
 				335BD00F249A908C0031A2B5 /* AppDelegate.swift */,
 				335BD011249A908C0031A2B5 /* SceneDelegate.swift */,
 				335BD013249A908C0031A2B5 /* ViewController.swift */,
@@ -128,6 +150,14 @@
 			path = GramophoneExampleUITests;
 			sourceTree = "<group>";
 		};
+		3364609226EC058A00E7FFDA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3364609326EC058A00E7FFDA /* Gramophone.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -138,6 +168,7 @@
 				335BD008249A908C0031A2B5 /* Sources */,
 				335BD009249A908C0031A2B5 /* Frameworks */,
 				335BD00A249A908C0031A2B5 /* Resources */,
+				3364609626EC058B00E7FFDA /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -234,6 +265,7 @@
 			files = (
 				335BD01C249A908D0031A2B5 /* LaunchScreen.storyboard in Resources */,
 				335BD019249A908D0031A2B5 /* Assets.xcassets in Resources */,
+				3364606726EC00C200E7FFDA /* BeatIt.mp3 in Resources */,
 				335BD017249A908C0031A2B5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -436,6 +468,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K4W5TXF9ZA;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GramophoneExample",
+				);
 				INFOPLIST_FILE = GramophoneExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -454,6 +490,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K4W5TXF9ZA;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GramophoneExample",
+				);
 				INFOPLIST_FILE = GramophoneExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

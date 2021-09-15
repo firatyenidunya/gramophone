@@ -10,6 +10,14 @@
 		335BD077249A91A30031A2B5 /* Gramophone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 335BD06D249A91A30031A2B5 /* Gramophone.framework */; };
 		335BD07C249A91A30031A2B5 /* GramophoneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335BD07B249A91A30031A2B5 /* GramophoneTests.swift */; };
 		335BD07E249A91A30031A2B5 /* Gramophone.h in Headers */ = {isa = PBXBuildFile; fileRef = 335BD070249A91A30031A2B5 /* Gramophone.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3364607026EC036400E7FFDA /* RandomAccessCollectionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3364606F26EC036400E7FFDA /* RandomAccessCollectionExtensions.swift */; };
+		3364607726EC038D00E7FFDA /* GramophoneItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3364607626EC038D00E7FFDA /* GramophoneItem.swift */; };
+		3364607C26EC03A100E7FFDA /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3364607B26EC03A100E7FFDA /* Time.swift */; };
+		3364608326EC03BF00E7FFDA /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3364608226EC03BF00E7FFDA /* Player.swift */; };
+		3364608926EC03EA00E7FFDA /* Gramophone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3364608826EC03EA00E7FFDA /* Gramophone.swift */; };
+		3364608F26EC050200E7FFDA /* GramophoneState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3364608E26EC050200E7FFDA /* GramophoneState.swift */; };
+		33FD2E2A26F3563500E9497B /* GramophoneProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FD2E2926F3563500E9497B /* GramophoneProtocol.swift */; };
+		33FD2E2E26F3565200E9497B /* GramophoneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FD2E2D26F3565200E9497B /* GramophoneDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +37,14 @@
 		335BD076249A91A30031A2B5 /* GramophoneTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GramophoneTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		335BD07B249A91A30031A2B5 /* GramophoneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GramophoneTests.swift; sourceTree = "<group>"; };
 		335BD07D249A91A30031A2B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3364606F26EC036400E7FFDA /* RandomAccessCollectionExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomAccessCollectionExtensions.swift; sourceTree = "<group>"; };
+		3364607626EC038D00E7FFDA /* GramophoneItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GramophoneItem.swift; sourceTree = "<group>"; };
+		3364607B26EC03A100E7FFDA /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
+		3364608226EC03BF00E7FFDA /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		3364608826EC03EA00E7FFDA /* Gramophone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gramophone.swift; sourceTree = "<group>"; };
+		3364608E26EC050200E7FFDA /* GramophoneState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GramophoneState.swift; sourceTree = "<group>"; };
+		33FD2E2926F3563500E9497B /* GramophoneProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GramophoneProtocol.swift; sourceTree = "<group>"; };
+		33FD2E2D26F3565200E9497B /* GramophoneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GramophoneDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +87,12 @@
 		335BD06F249A91A30031A2B5 /* Gramophone */ = {
 			isa = PBXGroup;
 			children = (
+				3364608826EC03EA00E7FFDA /* Gramophone.swift */,
+				33FD2E2926F3563500E9497B /* GramophoneProtocol.swift */,
+				33FD2E2D26F3565200E9497B /* GramophoneDelegate.swift */,
+				3364608126EC03B000E7FFDA /* Player */,
+				3364607526EC037500E7FFDA /* Objects */,
+				3364606E26EC033C00E7FFDA /* Extensions */,
 				335BD070249A91A30031A2B5 /* Gramophone.h */,
 				335BD071249A91A30031A2B5 /* Info.plist */,
 			);
@@ -84,6 +106,32 @@
 				335BD07D249A91A30031A2B5 /* Info.plist */,
 			);
 			path = GramophoneTests;
+			sourceTree = "<group>";
+		};
+		3364606E26EC033C00E7FFDA /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3364606F26EC036400E7FFDA /* RandomAccessCollectionExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		3364607526EC037500E7FFDA /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				3364607626EC038D00E7FFDA /* GramophoneItem.swift */,
+				3364607B26EC03A100E7FFDA /* Time.swift */,
+				3364608E26EC050200E7FFDA /* GramophoneState.swift */,
+			);
+			path = Objects;
+			sourceTree = "<group>";
+		};
+		3364608126EC03B000E7FFDA /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				3364608226EC03BF00E7FFDA /* Player.swift */,
+			);
+			path = Player;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,6 +196,7 @@
 				TargetAttributes = {
 					335BD06C249A91A30031A2B5 = {
 						CreatedOnToolsVersion = 11.4.1;
+						LastSwiftMigration = 1210;
 					};
 					335BD075249A91A30031A2B5 = {
 						CreatedOnToolsVersion = 11.4.1;
@@ -195,6 +244,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3364608326EC03BF00E7FFDA /* Player.swift in Sources */,
+				3364607C26EC03A100E7FFDA /* Time.swift in Sources */,
+				3364608926EC03EA00E7FFDA /* Gramophone.swift in Sources */,
+				3364607726EC038D00E7FFDA /* GramophoneItem.swift in Sources */,
+				3364607026EC036400E7FFDA /* RandomAccessCollectionExtensions.swift in Sources */,
+				33FD2E2A26F3563500E9497B /* GramophoneProtocol.swift in Sources */,
+				33FD2E2E26F3565200E9497B /* GramophoneDelegate.swift in Sources */,
+				3364608F26EC050200E7FFDA /* GramophoneState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,6 +397,7 @@
 		335BD082249A91A30031A2B5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -355,6 +413,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.gramophone.firatyenidunya.Gramophone;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -363,6 +422,7 @@
 		335BD083249A91A30031A2B5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -386,6 +446,7 @@
 		335BD085249A91A30031A2B5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = GramophoneTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -403,6 +464,7 @@
 		335BD086249A91A30031A2B5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = GramophoneTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
